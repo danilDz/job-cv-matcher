@@ -37,7 +37,7 @@ cd job-cv-matcher
 npm ci
 ```
 
-### 3. Set up environment variables
+### 3. Set up environment variables in `.env` file
 ``` javascript
 GEMINI_API_URL=your_gemini_api_url
 GEMINI_API_KEY=your_gemini_api_key
@@ -52,11 +52,11 @@ npm run start:dev
 
 ## Usage Instructions (via Postman)
 
-### 1. Create a new POST request with the following URL: `http://localhost:4000/trpc/analyze`
+#### 1. Create a new POST request with the following URL: `http://localhost:4000/trpc/analyze`
 
-### 2. Add Body to the created POST request. Type - `form-data`, and add two PDF files: `jobDescription` and `cv`
+#### 2. Add Body to the created POST request. Type - `form-data`, and add two PDF files: `jobDescription` and `cv`
 
-### 3. Send the request and wait for the answer
+#### 3. Send the request and wait for the answer
 
 ---
 
