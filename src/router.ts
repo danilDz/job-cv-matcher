@@ -1,7 +1,7 @@
-import { initTRPC, TRPCError } from '@trpc/server';
-import z from 'zod';
-import { unlink } from 'fs/promises';
-import { processAndAnalyzeFiles } from './analyzer';
+import { initTRPC, TRPCError } from "@trpc/server";
+import z from "zod";
+import { unlink } from "fs/promises";
+import { processAndAnalyzeFiles } from "./analyzer";
 
 const t = initTRPC.create();
 const router = t.router;
@@ -13,7 +13,7 @@ export const appRouter = router({
       z.object({
         jobDescription: z.string(),
         cv: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       const { jobDescription, cv } = input;
@@ -23,10 +23,10 @@ export const appRouter = router({
 
         return analysis;
       } catch (error) {
-        console.error('Error processing and analyzing files:', error);
+        console.error("Error processing and analyzing files:", error);
         throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to process and analyze the files.',
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to process and analyze the files.",
         });
       } finally {
         await Promise.all([unlink(jobDescription), unlink(cv)]);

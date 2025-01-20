@@ -1,7 +1,7 @@
-import { TRPCError } from '@trpc/server';
-import fs from 'fs/promises';
-import pdfParse from 'pdf-parse';
-import { generateContentRequest } from './gemini.service';
+import { TRPCError } from "@trpc/server";
+import fs from "fs/promises";
+import pdfParse from "pdf-parse";
+import { generateContentRequest } from "./gemini.service";
 
 export async function processAndAnalyzeFiles(jobPath: string, cvPath: string) {
   try {
@@ -29,9 +29,9 @@ export async function processAndAnalyzeFiles(jobPath: string, cvPath: string) {
     `;
 
     const requestBody = {
-      contents: [{ parts: [{ text: prompt }], role: 'user' }],
+      contents: [{ parts: [{ text: prompt }], role: "user" }],
       systemInstruction: {
-        role: 'system',
+        role: "system",
         parts: [
           {
             text: `You are a detail-oriented recruiter with more than 10 years of experience in analyzing candidates' CVs.`,
@@ -42,9 +42,15 @@ export async function processAndAnalyzeFiles(jobPath: string, cvPath: string) {
 
     const response = await generateContentRequest(requestBody);
 
-    return response?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response from AI.';
+    return (
+      response?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No response from AI."
+    );
   } catch (error) {
-    console.error('Error analyzing files:', error);
-    throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Analysis failed.' });
+    console.error("Error analyzing files:", error);
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Analysis failed.",
+    });
   }
 }
