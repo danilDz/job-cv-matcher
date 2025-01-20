@@ -8,7 +8,9 @@
   "scripts": {
     "start:dev": "nodemon src/main.ts",
     "start:prod": "node dist/main.js",
-    "build": "tsc"
+    "build": "tsc",
+    "prettier:format": "prettier --write src/**/*.ts",
+    "prettier:check": "prettier --check src/**/*.ts"
   },
   "dependencies": {
     "@trpc/server": "^10.45.2",
@@ -26,6 +28,7 @@
     "@types/node": "^22.10.6",
     "@types/pdf-parse": "^1.1.4",
     "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
     "typescript": "^5.7.3"
   }
 }
